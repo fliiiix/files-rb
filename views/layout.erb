@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Files</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Files">
+    <meta name="author" content="fliiiix">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+  </head>
+
+  <body>
+    <div class="pure-g-r">
+      <div class="header pure-u-1">
+          <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+              <a class="pure-menu-heading" href="/">Files</a>
+
+              <ul class="pull-right login">
+                  <% if admin? %>
+                    <li>Hi <%= AppConfig["User"] %></li>
+                    <li><a href="/logout">Logout</a></li>
+                  <% else %>
+                    <li><a href="/login">Login</a></li>
+                  <% end %>
+              </ul>
+          </div>
+      </div>
+
+        <div class="container pure-u">
+          <%= yield %>
+        </div>
+    </div>
+
+    <% if admin? %>
+      <!-- Le javascript -->
+      <script type="text/javascript" src="/js/main.min.js"></script>
+    <% end %>
+  </body>
+</html>

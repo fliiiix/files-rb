@@ -1,0 +1,27 @@
+<div class="block">
+  <h1>Files</h1>
+  <p>
+    Is a simple solution to host your files.
+  </p>
+  <% if admin? %>
+    <div style="float:left; margin-right: 50px;">
+      <%= erb :upload %>
+    </div>
+     <% if @files %>
+      <table class="pure-table pure-table-horizontal">
+          <thead>
+            <th>Link</th>
+            <th>Counter</th>
+            <th>Extention</th>
+          </thead>
+          <% for file in @files %>
+            <tr>
+              <td><a href="/<%= file.url %>"><%= file.fileName %></a></td>
+              <td><%= file.counter %></td>
+              <td><%= File.extname(file.filePath) %></td>
+            </tr>
+          <% end %>
+      </table>
+    <% end %>
+  <% end %> 
+</div>

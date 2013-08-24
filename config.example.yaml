@@ -1,0 +1,11 @@
+development:
+  User: test
+  Pass: ChangeMe
+production:
+  User: test
+  Pass: ChangeMe
+  Mongo:
+    Host: localhost
+    Port: 20543
+    User: user
+    Pass: pass
