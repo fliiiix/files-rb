@@ -1,0 +1,13 @@
+<div class="block">
+	<% oldIp = "0" %>
+	<% if !@fail.blank? %>
+	  <% for item in @fail %>
+	    <% if item.ip != oldIp%>
+	  		<%= item.ip %> <br>  
+	    <% end %>
+	    <% oldIp = item.ip %>
+	  <% end %>
+	<% else %>
+	  
+	<% end %>
+</div>

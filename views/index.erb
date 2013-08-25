@@ -13,12 +13,14 @@
             <th>Link</th>
             <th>Counter</th>
             <th>Extension</th>
+            <th>User / Pass</th>
           </thead>
           <% for file in @files %>
             <tr>
               <td><a href="/<%= file.url %>"><%= file.fileName %></a></td>
               <td><%= file.counter %></td>
               <td><%= File.extname(file.filePath) %></td>
+              <td><%= file.user %> / <%= file.pass %></td>
             </tr>
           <% end %>
       </table>

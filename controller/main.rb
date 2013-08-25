@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require "sinatra"
 require "yaml"
+require "date"
 require_relative "model.rb"
 require_relative "config.rb"
 require_relative "error.rb"
@@ -27,7 +28,7 @@ post "/upload" do
     filepath = ""
   end
 
-  file = UploadFile.new(:fileName => filename, :filePath => filepath, :url => filename, :counter => 0)
+  file = UploadFile.new(:fileName => filename, :filePath => filepath, :url => filename, :counter => 0, :user => params[:user], :pass => params[:pass])
 
   if file.save
     redirect "/"
@@ -37,9 +38,65 @@ post "/upload" do
   erb :index
 end
 
+get "/auth/:name" do |name|
+  # current time
+  t = Time.new
+
+  if FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count > 20
+    redirect "/lock"
+  end
+
+  @name = name
+  erb :auth
+end
+
+post "/auth/:name" do |name|
+  file = UploadFile.find_by_url(name)
+  halt 404 if file == nil
+
+  if file.user != params[:username] || file.pass != params[:pass]
+    # current time
+    t = Time.new
+
+    fail = FailLogin.new(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day)
+    fail.save
+
+    if FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count > 20
+      redirect "/lock"
+    end
+
+    redirect "/auth/" + name
+  end
+
+  begin
+    file.counter += 1
+    file.save  
+  rescue Exception => e
+    puts e
+  end
+
+  send_file file.filePath, :filename => file.fileName, :disposition => (image?(file.fileName) ? 'inline' : 'attachment')
+end
+
+get "/lock" do
+  erb :lock
+end
+
+get "/admin/lock" do
+  # current time
+  t = Time.new
+
+  @fail = FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day)
+  erb :adminLock
+end
+
 get "/:name/?" do |name|
   file = UploadFile.find_by_url(name)
   halt 404 if file == nil
+
+  if file.user != "" && file.pass != ""
+    redirect "/auth/" + name
+  end
 
   begin
     file.counter += 1

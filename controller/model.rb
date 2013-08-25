@@ -48,3 +48,11 @@ class UploadFile
     string.downcase.gsub("ö", "oe").gsub("ü", "ue").gsub("ä", "ae").gsub(/\W/,'-').squeeze('-').chomp('-').sub!(/^-*/, '')
   end
 end
+
+class FailLogin
+  include MongoMapper::Document
+  key :ip,    String,  :require => true
+  key :day,   Integer, :require => true
+  key :month, Integer, :require => true
+  key :year,  Integer, :require => true
+end 
