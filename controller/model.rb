@@ -10,6 +10,8 @@ class UploadFile
   key :fileName,       String,  :require => true
   key :url,            String,  :require => true
   key :counter,        Integer, :numeric => true
+  key :user,           String
+  key :pass,           String
   timestamps!
 
   before_create :upload, :makeUrlNice
@@ -18,7 +20,7 @@ class UploadFile
   def upload
     #File upload
     filename = rand(36**8).to_s(36) + fileName
-    path = File.expand_path(File.dirname(__FILE__) + "/../public/uploads/#{filename}")
+    path = File.expand_path(File.dirname(__FILE__) + "/../uploads/#{filename}")
 
     begin
       FileUtils.cp(filePath, path)

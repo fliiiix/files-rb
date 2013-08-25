@@ -1,11 +1,14 @@
 <div><%= @meldung %></div>
-<form action="/upload" method="post" enctype="multipart/form-data" class="pure-form">
-	<div id="selectedFileDiv" class="pure-button fileContainer pull-left" style="display:none;">
+<form action="/upload" method="post" enctype="multipart/form-data" class="pure-form pure-form-aligned">
+    <input id="name" type="text" placeholder="File Username">
+    <input id="password" type="password" placeholder="File Password">
+    <br><br>
+	<div id="selectedFileDiv" class="pure-button fileContainer" style="display:none;">
 		<i class="icon-cancel" onclick="selectNewFile();"></i>
 		<span id="filename"></span>	
 	</div>
 	 
-	<div id="uploadDiv" class="pure-button fileContainer pull-left">
+	<div id="uploadDiv" class="pure-button fileContainer">
 		<i class="icon-box-remove"></i>
 		<span>Select file</span>	
 		<input type="file" name="file" id="uploadInput" onchange="enableUpload();" />
