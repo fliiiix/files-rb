@@ -55,4 +55,12 @@ class FailLogin
   key :day,   Integer, :require => true
   key :month, Integer, :require => true
   key :year,  Integer, :require => true
-end 
+end
+
+class FailLoginViewModel
+  attr_accessor :ip, :counter
+  def initialize(ip, counter)
+    @ip = ip
+    @counter = counter
+  end
+end

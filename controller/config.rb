@@ -12,7 +12,7 @@ configure :development do
   set :show_exceptions, true
   set :views, Proc.new { File.join(root, "../views") }
   set :public_folder, Proc.new { File.join(root, "../public") }
-  Debug = true
+  Debug = false
 end
 
 configure :production do

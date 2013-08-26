@@ -42,7 +42,7 @@ get "/auth/:name" do |name|
   # current time
   t = Time.new
 
-  if FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count > 20
+  if FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count >= 20
     redirect "/lock"
   end
 
@@ -83,11 +83,25 @@ get "/lock" do
 end
 
 get "/admin/lock" do
+  protected!
   # current time
   t = Time.new
+  oldIp = nil
+  @fails = Array.new
 
-  @fail = FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day)
+  fails = FailLogin.where(:year => t.year, :month => t.month, :day => t.day) #.grouped_by(:ip).find.count
+  for fail in fails do
+    if oldIp != fail.ip
+      @fails << FailLoginViewModel.new(fail.ip, FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count)
+    end
+    oldIp = fail.ip
+  end
   erb :adminLock
+end
+
+get "/unlock/:ip" do |ip|
+  FailLogin.destroy_all(:ip => ip)
+  redirect "/admin/lock"
 end
 
 get "/:name/?" do |name|
