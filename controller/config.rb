@@ -3,7 +3,7 @@ use Rack::Session::Pool
 helpers do
   def admin? ; session["isLogdIn"] == true || Debug; end
   def protected! ; halt 401 unless admin? ; end
-  def image?(file) file.to_s.include?(".gif") or file.to_s.include?(".png") or file.to_s.include?(".jpg") end
+  def image?(file) file.to_s.include?(".gif") or file.to_s.include?(".png") or file.to_s.include?(".jpg") or file.to_s.include?(".jpeg") end
 end
 
 configure :development do
@@ -12,7 +12,7 @@ configure :development do
   set :show_exceptions, true
   set :views, Proc.new { File.join(root, "../views") }
   set :public_folder, Proc.new { File.join(root, "../public") }
-  Debug = false
+  Debug = true
 end
 
 configure :production do
