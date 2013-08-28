@@ -1,21 +1,20 @@
 <div class="block">
 	<h1>Locked IPs for today</h1>
-	<% oldIp = "0" %>
 	<% if !@fails.blank? %>
-	<table class="pure-table">
-		<thead>
-			<th>IP</th>
-			<th>Counter</th>
-			<th>&nbsp;</th>
-		</thead>
-		<% for fail in @fails %>
-			<tr style="background-color:<%= fail.counter >= 20 ? "red" : ""%>">
-				<td><%= fail.ip %></td>
-				<td><%= fail.counter %></td>
-				<td><a href="/unlock/<%= fail.ip %>" class="pure-button pure-button-primary" style="color:black;">Unlock</a></td>
-			</tr>
-		<% end %>
-	</table>
+		<table class="pure-table">
+			<thead>
+				<th>IP</th>
+				<th>Counter</th>
+				<th>&nbsp;</th>
+			</thead>
+			<% for fail in @fails %>
+				<tr style="background-color:<%= fail.counter >= 20 ? "red" : ""%>">
+					<td><%= fail.ip %></td>
+					<td><%= fail.counter %></td>
+					<td><a href="/unlock/<%= fail.ip %>" class="pure-button pure-button-primary" style="color:black;">Unlock</a></td>
+				</tr>
+			<% end %>
+		</table>
 	<% else %>
 	  
 	<% end %>
