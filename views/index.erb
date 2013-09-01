@@ -4,11 +4,11 @@
     Is a simple solution to host your files.
   </p>
   <% if admin? %>
-    <div style="float:left; margin-right: 50px;">
+    <div style="float:left; margin-right: 50px; margin-bottom:35px;">
       <%= erb :upload %>
     </div>
      <% if @files %>
-      <table class="pure-table pure-table-horizontal">
+      <table class="pure-table pure-table-horizontal" style="width:100%">
           <thead>
             <th>Link</th>
             <th>Counter</th>
