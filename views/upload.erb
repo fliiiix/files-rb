@@ -1,17 +1,22 @@
 <div><%= @meldung %></div>
 <form action="/upload" method="post" enctype="multipart/form-data" class="pure-form pure-form-aligned">
-    <input id="name" name="user" type="text" placeholder="File Username">
-    <input id="password" name="pass" type="password" placeholder="File Password">
-	<div id="selectedFileDiv" class="pure-button fileContainer" style="display:none;">
-		<i class="icon-cancel" onclick="selectNewFile();"></i>
+    <div id="selectedFileDiv" class="pure-button fileContainer pull-left" style="display:none;">
+		<i class="icon-cancel" onclick="selectNewFile();">X</i>
 		<span id="filename"></span>	
 	</div>
 	 
-	<div id="uploadDiv" class="pure-button fileContainer">
-		<i class="icon-box-remove"></i>
+	<div id="uploadDiv" class="pure-button fileContainer pull-left">
 		<span>Select file</span>	
 		<input type="file" name="file" id="uploadInput" onchange="enableUpload();" />
 	</div>
 
-	<input type="submit" value="Save" id="submit" style="margin-left:10px;" class="pure-button pure-button-primary pure-button-small">
+	<div class="pull-left">
+		<input type="submit" value="Save" id="submit" style="margin-left:10px;" class="pure-button pure-button-primary pure-button-small">
+	</div>
+	<div class="clear">&nbsp;</div>
+	<div>
+		<input type="checkbox" name="protected" value="Protected" id="protected" onclick="toglePassword();"> Protected: 
+		<input id="name" name="user" type="text" placeholder="File Username" disabled>
+		<input id="password" name="pass" type="password" placeholder="File Password" disabled>
+	</div>	
 </form>

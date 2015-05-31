@@ -1,11 +1,12 @@
+var $ = function (id) { return document.getElementById(id); };
 function enableUpload() {
-  var uploadInput = document.getElementById('uploadInput');
+  var uploadInput = $('uploadInput');
   if (uploadInput.value != ''){
-    document.getElementById('uploadDiv').style.display = 'none';
-    document.getElementById('selectedFileDiv').style.display = '';
+    $('uploadDiv').style.display = 'none';
+    $('selectedFileDiv').style.display = '';
      
     //remove span content and add the file name
-    var filenameSpan = document.getElementById('filename');
+    var filenameSpan = $('filename');
     while( filenameSpan.firstChild ) {
       filenameSpan.removeChild( filenameSpan.firstChild );
     }
@@ -14,7 +15,21 @@ function enableUpload() {
 }
    
 function selectNewFile() {
-  document.getElementById('uploadDiv').style.display = '';
-  document.getElementById('selectedFileDiv').style.display = 'none';
-  document.getElementById('uploadInput').value = '';
+  $('uploadDiv').style.display = '';
+  $('selectedFileDiv').style.display = 'none';
+  $('uploadInput').value = '';
+}
+
+function toglePassword(){
+  var checked = $('protected').checked;
+  if(checked)
+  {
+    $('name').disabled = false;
+    $('password').disabled = false;
+  }
+  else
+  {
+    $('name').disabled = true;
+    $('password').disabled = true;
+  }
 }
