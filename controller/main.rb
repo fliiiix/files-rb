@@ -2,6 +2,7 @@
 require "sinatra"
 require "yaml"
 require "date"
+
 require_relative "model.rb"
 require_relative "config.rb"
 require_relative "error.rb"
@@ -89,7 +90,7 @@ get "/admin/lock" do
   oldIp = nil
   @fails = Array.new
 
-  fails = FailLogin.where(:year => t.year, :month => t.month, :day => t.day) #.grouped_by(:ip).find.count
+  fails = FailLogin.where(:year => t.year, :month => t.month, :day => t.day)
   for fail in fails do
     if oldIp != fail.ip
       @fails << FailLoginViewModel.new(fail.ip, FailLogin.where(:ip => request.ip, :year => t.year, :month => t.month, :day => t.day).count)
