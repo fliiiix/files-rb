@@ -1,5 +1,4 @@
 #ignore the config
-config.yaml
 bin/
 .bundle/
 vendor/

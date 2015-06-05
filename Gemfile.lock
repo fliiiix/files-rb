@@ -50,3 +50,6 @@ DEPENDENCIES
   mongo_mapper
   puma
   sinatra
+
+BUNDLED WITH
+   1.10.3
