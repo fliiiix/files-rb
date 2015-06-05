@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require "sinatra"
-require "yaml"
+require "bcrypt"
 require "date"
 
 require_relative "model.rb"
