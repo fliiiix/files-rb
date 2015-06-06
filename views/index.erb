@@ -20,10 +20,10 @@
               <td><a href="/<%= file.url %>"><%= file.fileName %></a></td>
               <td><%= file.counter %></td>
               <td><%= File.extname(file.filePath) %></td>
-              <% if (file.user != "" && file.pass != "") %>
-                <td><%= file.user %> / <%= file.pass %></td>
-              <% else %>
+              <% if (file.user.to_s.empty? && file.pass.to_s.empty?) %>
                 <td>public</td>
+              <% else %>
+                <td><%= file.user %> / <%= file.pass %></td>
               <% end %>
             </tr>
           <% end %>

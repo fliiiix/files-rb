@@ -109,7 +109,7 @@ get "/:name/?" do |name|
   file = UploadFile.find_by_url(name)
   halt 404 if file == nil
 
-  if file.user != "" && file.pass != ""
+  unless file.user.to_s.empty? && file.pass.to_s.empty?
     redirect "/auth/" + name
   end
 
