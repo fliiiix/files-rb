@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require "active_model/serializers"
 require "mongo_mapper"
 require "fileutils"
 require "uri"
